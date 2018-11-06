@@ -137,9 +137,9 @@ window.onload =() =>
 	    {
 	        var body = document.getElementsByTagName('body');
 	        body[0].style.backgroundColor = "#FFFFFF";
-	        text[0].innerHTML = "CONGRATULATION YOU WIN!!!";
+	        text[0].innerHTML = "WINNER WINNER WINNER!!!";
 	        text[0].style.fontWeight = "bold";
-	        text[1].innerHTML = "CONGRATULATION YOU WIN!!!";
+	        text[1].innerHTML = "WINNER WINNER WINNER!!!";
 	        text[1].style.fontWeight = "bold";
 	        stoptime();
 	        return;
