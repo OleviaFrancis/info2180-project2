@@ -1,7 +1,7 @@
 //Code done by Olevia Francis
 //Extra features: end of game notification, game time
 var timing = document.createElement("time");
-	var h_2= document.createElement("h2");
+var h_2= document.createElement("h2");
 	var node = document.createTextNode("00:00:00");
 var hx = h_2[0]
 	var  seconds = 0, minutes = 0, hours = 0,t;
@@ -78,12 +78,14 @@ window.onload =() =>
 				{
 					this.style.border = "2px solid red";
 					this.style.color = "#006600";
+					this.style.textDecoration = "underline";
 				}
 			};
 	function black ()
 			{
 				this.style.border = "2px solid black";
 				this.style.color = "#000000";
+				this.style.textDecoration = "none";
 			};
 	function shuffle()
 	{
