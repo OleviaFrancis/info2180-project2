@@ -1,9 +1,25 @@
-
+//Code done by Olevia Francis
+//Extra features: end of game notification, game time
+var timing = document.createElement("time");
+	var h_2= document.createElement("h2");
+	var node = document.createTextNode("00:00:00");
+var hx = h_2[0]
+	var  seconds = 0, minutes = 0, hours = 0,t;
+var b_ground;
+	var timer;
+	var restartbutton = document.createElement("input")
+		restartbutton.type ="submit"
+		restartbutton.value ="Restart Game"	
 window.onload =() =>
 {
 
 	
-	var  seconds = 0, minutes = 0, hours = 0,t;
+
+	timing.appendChild(node);
+	h_2.appendChild(timing);
+	document.body.appendChild(h_2);
+
+	
 	let p_area = document.getElementById("puzzlearea");
 	let children = document.querySelectorAll("#puzzlearea div")
 	let shufflebutton = document.getElementById("shufflebutton")
@@ -13,11 +29,9 @@ window.onload =() =>
 	let count =0;
 	let space1= '300px';
 	let space2= '300px';
-	var b_ground;
-	
 	
 
-
+		document.body.appendChild(restartbutton);
 
 		for (let i=0; i< children.length; i++)
 		{
@@ -43,8 +57,8 @@ window.onload =() =>
 		 //shuffle();
 
 	shufflebutton.addEventListener("click",shuffle);
-	//shufflebutton.addEventListener("click",tim);
-	
+	shufflebutton.addEventListener("click",tim);
+	restartbutton.addEventListener("click",restart);
 
 	function slide ()
 			{
@@ -78,7 +92,7 @@ window.onload =() =>
             let rand = parseInt(Math.random()* 100) %4;
             if (rand == 0)
             {
-                let mve = UP(space1,space2);
+                let mve = moveup(space1,space2);
                 if ( mve != -1)
                 {
                     swap(mve);
@@ -86,7 +100,7 @@ window.onload =() =>
             }
             if (rand == 1)
             {
-                let mve = DOWN(space1,space2);
+                let mve = movedown(space1,space2);
                 if ( mve != -1) 
                 {
                     swap(mve);
@@ -123,13 +137,36 @@ window.onload =() =>
 	        body[0].style.backgroundColor = "#FFFFFF";
 	        text[0].innerHTML = "CONGRATULATION YOU WIN";
 	        text[1].innerHTML = "CONGRATULATION YOU WIN";
-	      
+	        stoptime();
 	        return;
 	    }
-	    
+	    if (b_ground % 2)
+	    {
+	        var body = document.getElementsByTagName('body');
+	        body[0].style.backgroundColor = "#1302fc";    
+	    }
+	    else
+	    {
+        	var body = document.getElementsByTagName('body');
+        	body[0].style.backgroundColor = "#02fcfc";
+    	}
+    	timer = setTimeout(change, 100);
 	}
 
-	
+	function Gamewin()
+	{
+		let body = document.getElementsByTagName('body');
+		body[0].style.backgroundColor = "#FF0000";
+		b_ground = 10;
+		timer = setTimeout(change,100);
+		
+
+	}
+
+	function restart()
+	{
+		location.reload();
+	}
 
 
 	function finish()
@@ -168,12 +205,12 @@ window.onload =() =>
 			return true;
 		}
 
-		if(DOWN(space1,space2) == (pos-1))
+		if(movedown(space1,space2) == (pos-1))
 		{
 			return true;
 		}
 
-		if(UP(space1,space2) == (pos-1))
+		if(moveup(space1,space2) == (pos-1))
 		{
 			return true;
 		}
@@ -227,7 +264,7 @@ window.onload =() =>
 	}
 
 
-	function DOWN (x, y)
+	function movedown (x, y)
 	{
 	    var xx = parseInt(x);
 	    var yy = parseInt(y);
@@ -247,7 +284,7 @@ window.onload =() =>
 	    } 
 	}
 
-	function UP (x, y)
+	function moveup (x, y)
 	{
 	    var xx = parseInt(x);
 	    var yy = parseInt(y);
@@ -266,5 +303,27 @@ window.onload =() =>
 	        return -1;
 	    }
 	}
-	
+
+	function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    	h_2.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    	tim();
+	}
+	function tim() {
+    	t = setTimeout(add, 1000);
+	}
+
+	function stoptime(){
+		clearTimeout(t);
+	}
 }
